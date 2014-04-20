@@ -1,0 +1,505 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CB028D3E1903E0660044B86F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB028D3D1903E0660044B86F /* Foundation.framework */; };
+		CB028D401903E0660044B86F /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB028D3F1903E0660044B86F /* CoreGraphics.framework */; };
+		CB028D421903E0660044B86F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB028D411903E0660044B86F /* UIKit.framework */; };
+		CB028D481903E0660044B86F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB028D461903E0660044B86F /* InfoPlist.strings */; };
+		CB028D4A1903E0660044B86F /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D491903E0660044B86F /* main.m */; };
+		CB028D4E1903E0660044B86F /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D4D1903E0660044B86F /* AppDelegate.m */; };
+		CB028D511903E0660044B86F /* Main_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB028D4F1903E0660044B86F /* Main_iPhone.storyboard */; };
+		CB028D541903E0660044B86F /* Main_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CB028D521903E0660044B86F /* Main_iPad.storyboard */; };
+		CB028D571903E0660044B86F /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D561903E0660044B86F /* ViewController.m */; };
+		CB028D591903E0660044B86F /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CB028D581903E0660044B86F /* Images.xcassets */; };
+		CB028D601903E0660044B86F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB028D5F1903E0660044B86F /* XCTest.framework */; };
+		CB028D611903E0660044B86F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB028D3D1903E0660044B86F /* Foundation.framework */; };
+		CB028D621903E0660044B86F /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CB028D411903E0660044B86F /* UIKit.framework */; };
+		CB028D6A1903E0660044B86F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = CB028D681903E0660044B86F /* InfoPlist.strings */; };
+		CB028D6C1903E0660044B86F /* LazyFadeInViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D6B1903E0660044B86F /* LazyFadeInViewTests.m */; };
+		CB028D781903E0A10044B86F /* LazyFadeInView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D771903E0A10044B86F /* LazyFadeInView.m */; };
+		CB028D7B1903E10C0044B86F /* LazyFadeInLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CB028D631903E0660044B86F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CB028D321903E0660044B86F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CB028D391903E0660044B86F;
+			remoteInfo = LazyFadeInView;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CB028D3A1903E0660044B86F /* LazyFadeInView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LazyFadeInView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB028D3D1903E0660044B86F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		CB028D3F1903E0660044B86F /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		CB028D411903E0660044B86F /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		CB028D451903E0660044B86F /* LazyFadeInView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LazyFadeInView-Info.plist"; sourceTree = "<group>"; };
+		CB028D471903E0660044B86F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB028D491903E0660044B86F /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CB028D4B1903E0660044B86F /* LazyFadeInView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LazyFadeInView-Prefix.pch"; sourceTree = "<group>"; };
+		CB028D4C1903E0660044B86F /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CB028D4D1903E0660044B86F /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CB028D501903E0660044B86F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
+		CB028D531903E0660044B86F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
+		CB028D551903E0660044B86F /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CB028D561903E0660044B86F /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CB028D581903E0660044B86F /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		CB028D5E1903E0660044B86F /* LazyFadeInViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LazyFadeInViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CB028D5F1903E0660044B86F /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		CB028D671903E0660044B86F /* LazyFadeInViewTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "LazyFadeInViewTests-Info.plist"; sourceTree = "<group>"; };
+		CB028D691903E0660044B86F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		CB028D6B1903E0660044B86F /* LazyFadeInViewTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LazyFadeInViewTests.m; sourceTree = "<group>"; };
+		CB028D761903E0A10044B86F /* LazyFadeInView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LazyFadeInView.h; sourceTree = "<group>"; };
+		CB028D771903E0A10044B86F /* LazyFadeInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LazyFadeInView.m; sourceTree = "<group>"; };
+		CB028D791903E10C0044B86F /* LazyFadeInLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LazyFadeInLayer.h; sourceTree = "<group>"; };
+		CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LazyFadeInLayer.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CB028D371903E0660044B86F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB028D401903E0660044B86F /* CoreGraphics.framework in Frameworks */,
+				CB028D421903E0660044B86F /* UIKit.framework in Frameworks */,
+				CB028D3E1903E0660044B86F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB028D5B1903E0660044B86F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB028D601903E0660044B86F /* XCTest.framework in Frameworks */,
+				CB028D621903E0660044B86F /* UIKit.framework in Frameworks */,
+				CB028D611903E0660044B86F /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CB028D311903E0660044B86F = {
+			isa = PBXGroup;
+			children = (
+				CB028D431903E0660044B86F /* LazyFadeInView */,
+				CB028D651903E0660044B86F /* LazyFadeInViewTests */,
+				CB028D3C1903E0660044B86F /* Frameworks */,
+				CB028D3B1903E0660044B86F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CB028D3B1903E0660044B86F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D3A1903E0660044B86F /* LazyFadeInView.app */,
+				CB028D5E1903E0660044B86F /* LazyFadeInViewTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CB028D3C1903E0660044B86F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D3D1903E0660044B86F /* Foundation.framework */,
+				CB028D3F1903E0660044B86F /* CoreGraphics.framework */,
+				CB028D411903E0660044B86F /* UIKit.framework */,
+				CB028D5F1903E0660044B86F /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		CB028D431903E0660044B86F /* LazyFadeInView */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D751903E0900044B86F /* LazyFadeInView */,
+				CB028D4C1903E0660044B86F /* AppDelegate.h */,
+				CB028D4D1903E0660044B86F /* AppDelegate.m */,
+				CB028D4F1903E0660044B86F /* Main_iPhone.storyboard */,
+				CB028D521903E0660044B86F /* Main_iPad.storyboard */,
+				CB028D551903E0660044B86F /* ViewController.h */,
+				CB028D561903E0660044B86F /* ViewController.m */,
+				CB028D581903E0660044B86F /* Images.xcassets */,
+				CB028D441903E0660044B86F /* Supporting Files */,
+			);
+			path = LazyFadeInView;
+			sourceTree = "<group>";
+		};
+		CB028D441903E0660044B86F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D451903E0660044B86F /* LazyFadeInView-Info.plist */,
+				CB028D461903E0660044B86F /* InfoPlist.strings */,
+				CB028D491903E0660044B86F /* main.m */,
+				CB028D4B1903E0660044B86F /* LazyFadeInView-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB028D651903E0660044B86F /* LazyFadeInViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D6B1903E0660044B86F /* LazyFadeInViewTests.m */,
+				CB028D661903E0660044B86F /* Supporting Files */,
+			);
+			path = LazyFadeInViewTests;
+			sourceTree = "<group>";
+		};
+		CB028D661903E0660044B86F /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D671903E0660044B86F /* LazyFadeInViewTests-Info.plist */,
+				CB028D681903E0660044B86F /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CB028D751903E0900044B86F /* LazyFadeInView */ = {
+			isa = PBXGroup;
+			children = (
+				CB028D761903E0A10044B86F /* LazyFadeInView.h */,
+				CB028D771903E0A10044B86F /* LazyFadeInView.m */,
+				CB028D791903E10C0044B86F /* LazyFadeInLayer.h */,
+				CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */,
+			);
+			path = LazyFadeInView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CB028D391903E0660044B86F /* LazyFadeInView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB028D6F1903E0660044B86F /* Build configuration list for PBXNativeTarget "LazyFadeInView" */;
+			buildPhases = (
+				CB028D361903E0660044B86F /* Sources */,
+				CB028D371903E0660044B86F /* Frameworks */,
+				CB028D381903E0660044B86F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LazyFadeInView;
+			productName = LazyFadeInView;
+			productReference = CB028D3A1903E0660044B86F /* LazyFadeInView.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CB028D5D1903E0660044B86F /* LazyFadeInViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CB028D721903E0660044B86F /* Build configuration list for PBXNativeTarget "LazyFadeInViewTests" */;
+			buildPhases = (
+				CB028D5A1903E0660044B86F /* Sources */,
+				CB028D5B1903E0660044B86F /* Frameworks */,
+				CB028D5C1903E0660044B86F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CB028D641903E0660044B86F /* PBXTargetDependency */,
+			);
+			name = LazyFadeInViewTests;
+			productName = LazyFadeInViewTests;
+			productReference = CB028D5E1903E0660044B86F /* LazyFadeInViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CB028D321903E0660044B86F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Tu You";
+				TargetAttributes = {
+					CB028D5D1903E0660044B86F = {
+						TestTargetID = CB028D391903E0660044B86F;
+					};
+				};
+			};
+			buildConfigurationList = CB028D351903E0660044B86F /* Build configuration list for PBXProject "LazyFadeInView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CB028D311903E0660044B86F;
+			productRefGroup = CB028D3B1903E0660044B86F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CB028D391903E0660044B86F /* LazyFadeInView */,
+				CB028D5D1903E0660044B86F /* LazyFadeInViewTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CB028D381903E0660044B86F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB028D541903E0660044B86F /* Main_iPad.storyboard in Resources */,
+				CB028D591903E0660044B86F /* Images.xcassets in Resources */,
+				CB028D511903E0660044B86F /* Main_iPhone.storyboard in Resources */,
+				CB028D481903E0660044B86F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB028D5C1903E0660044B86F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB028D6A1903E0660044B86F /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CB028D361903E0660044B86F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB028D571903E0660044B86F /* ViewController.m in Sources */,
+				CB028D781903E0A10044B86F /* LazyFadeInView.m in Sources */,
+				CB028D7B1903E10C0044B86F /* LazyFadeInLayer.m in Sources */,
+				CB028D4E1903E0660044B86F /* AppDelegate.m in Sources */,
+				CB028D4A1903E0660044B86F /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CB028D5A1903E0660044B86F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CB028D6C1903E0660044B86F /* LazyFadeInViewTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CB028D641903E0660044B86F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CB028D391903E0660044B86F /* LazyFadeInView */;
+			targetProxy = CB028D631903E0660044B86F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CB028D461903E0660044B86F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB028D471903E0660044B86F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		CB028D4F1903E0660044B86F /* Main_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB028D501903E0660044B86F /* Base */,
+			);
+			name = Main_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		CB028D521903E0660044B86F /* Main_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB028D531903E0660044B86F /* Base */,
+			);
+			name = Main_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		CB028D681903E0660044B86F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CB028D691903E0660044B86F /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CB028D6D1903E0660044B86F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		CB028D6E1903E0660044B86F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CB028D701903E0660044B86F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LazyFadeInView/LazyFadeInView-Prefix.pch";
+				INFOPLIST_FILE = "LazyFadeInView/LazyFadeInView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		CB028D711903E0660044B86F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LazyFadeInView/LazyFadeInView-Prefix.pch";
+				INFOPLIST_FILE = "LazyFadeInView/LazyFadeInView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		CB028D731903E0660044B86F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LazyFadeInView.app/LazyFadeInView";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LazyFadeInView/LazyFadeInView-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "LazyFadeInViewTests/LazyFadeInViewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		CB028D741903E0660044B86F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/LazyFadeInView.app/LazyFadeInView";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "LazyFadeInView/LazyFadeInView-Prefix.pch";
+				INFOPLIST_FILE = "LazyFadeInViewTests/LazyFadeInViewTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CB028D351903E0660044B86F /* Build configuration list for PBXProject "LazyFadeInView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB028D6D1903E0660044B86F /* Debug */,
+				CB028D6E1903E0660044B86F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CB028D6F1903E0660044B86F /* Build configuration list for PBXNativeTarget "LazyFadeInView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB028D701903E0660044B86F /* Debug */,
+				CB028D711903E0660044B86F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CB028D721903E0660044B86F /* Build configuration list for PBXNativeTarget "LazyFadeInViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CB028D731903E0660044B86F /* Debug */,
+				CB028D741903E0660044B86F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CB028D321903E0660044B86F /* Project object */;
+}
