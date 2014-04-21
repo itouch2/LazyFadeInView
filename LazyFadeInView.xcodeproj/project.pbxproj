@@ -61,6 +61,7 @@
 		CB028D771903E0A10044B86F /* LazyFadeInView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LazyFadeInView.m; sourceTree = "<group>"; };
 		CB028D791903E10C0044B86F /* LazyFadeInLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LazyFadeInLayer.h; sourceTree = "<group>"; };
 		CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LazyFadeInLayer.m; sourceTree = "<group>"; };
+		CB2DA0D619056C7500E152D1 /* LazyFadeIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyFadeIn.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +166,7 @@
 		CB028D751903E0900044B86F /* LazyFadeInView */ = {
 			isa = PBXGroup;
 			children = (
+				CB2DA0D619056C7500E152D1 /* LazyFadeIn.h */,
 				CB028D761903E0A10044B86F /* LazyFadeInView.h */,
 				CB028D771903E0A10044B86F /* LazyFadeInView.m */,
 				CB028D791903E10C0044B86F /* LazyFadeInLayer.h */,
@@ -490,6 +492,7 @@
 				CB028D711903E0660044B86F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CB028D721903E0660044B86F /* Build configuration list for PBXNativeTarget "LazyFadeInViewTests" */ = {
 			isa = XCConfigurationList;
@@ -498,6 +501,7 @@
 				CB028D741903E0660044B86F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
