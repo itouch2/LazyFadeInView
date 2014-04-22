@@ -7,7 +7,8 @@
 //
 
 #import <QuartzCore/QuartzCore.h>
+#import "LazyFadeIn.h"
 
-@interface LazyFadeInLayer : CATextLayer
+@interface LazyFadeInLayer : CATextLayer <LazyFadeIn>
 
 @end

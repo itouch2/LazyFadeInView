@@ -6,13 +6,15 @@
 //  Copyright (c) 2014年 Tu You. All rights reserved.
 //
 
-#ifndef LazyFadeInView_LazyFadeIn_h
-#define LazyFadeInView_LazyFadeIn_h
+#import <Foundation/Foundation.h>
 
-@protocol LazyFadeInView <NSObject>
+@protocol LazyFadeIn <NSObject>
 
+//! @abstract The duration of the complete fading. Defaults to 1.0.
+@property (assign, nonatomic, readwrite) CFTimeInterval duration;
 
+//! @abstract The number of layers lazy loading. Defaults to 3.
+@property (assign, nonatomic, readwrite) NSUInteger numberOfLayers;
 
 @end
 
-#endif
