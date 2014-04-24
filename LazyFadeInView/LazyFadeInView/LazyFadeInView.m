@@ -9,6 +9,8 @@
 #import "LazyFadeInView.h"
 #import "LazyFadeInLayer.h"
 
+#define __layer ((LazyFadeInView *)self.layer)
+
 @implementation LazyFadeInView
 
 + (Class)layerClass
@@ -19,11 +21,16 @@
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    if (self)
+    {
+        self.backgroundColor = [UIColor clearColor];   
     }
     return self;
 }
 
+- (void)setText:(NSString *)text
+{
+    __layer.text = text;
+}
 
 @end

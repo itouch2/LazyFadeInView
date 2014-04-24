@@ -33,10 +33,14 @@
     if (self)
     {
         _duration = 1.2f;
-        _numberOfLayers = 4;
+        _numberOfLayers = 6;
         _interval = 0.2;
         _alphaArray = [NSMutableArray array];
         _tmpArray = [NSMutableArray array];
+        _attributedString = [[NSMutableAttributedString alloc] init];
+        
+        self.contentsScale = [[UIScreen mainScreen] scale];
+        self.wrapped = YES;
     }
     return self;
 }
@@ -51,32 +55,54 @@
     return _displayLink;
 }
 
-- (void)setString:(id)string
+- (void)setText:(NSString *)text
 {
     
-    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+//    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     
-    self.text = string;
-    
+    _text = text;
+
+    _attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
     [self setupAlphaArray];
     
+    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(frameUpdate:)];
     [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 
 - (void)frameUpdate:(id)sender
 {
+    
+    [self.attributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
+    
     for (int i = 0; i < self.text.length; ++i)
     {
         float alpha = [_alphaArray[i] floatValue];
         alpha = alpha < 0 ? 0 : alpha;
         alpha = alpha > 1 ? 1 : alpha;
+
         UIColor *letterColor = [UIColor colorWithWhite:1 alpha:alpha];
         [self.attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
-                                      value:(id)letterColor
+                                      value:(id)letterColor.CGColor
                                       range:NSMakeRange(i, 1)];
     }
+    
+    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("Helvetica"), 20.0, NULL);
+    
+    [self.attributedString addAttribute:(NSString *)kCTFontAttributeName
+                                  value:(__bridge id)helveticaBold
+                                  range:NSMakeRange(0, self.text.length)];
+    
+    NSMutableArray *tAlpha = [NSMutableArray array];
+    for (int i = 0; i < _alphaArray.count; ++i)
+    {
+        float newAlpha = [_alphaArray[i] floatValue] + (1.0 / 50);
+        
+        [tAlpha addObject:@(newAlpha)];
+    }
+    
+    _alphaArray = tAlpha;
 
-    self.text = (id)self.attributedString;
+    self.string = (id)self.attributedString;
 }
 
 - (void)setupAlphaArray
@@ -94,14 +120,15 @@
 - (void)randomAlphaArray
 {
     NSUInteger totalCount = self.text.length;
- 
+
+    int tTotalCount = totalCount;
     [_tmpArray removeAllObjects];
     
     for (int i = 0; i < _numberOfLayers; ++i)
     {
-        int k = arc4random() % totalCount;
+        int k = arc4random() % tTotalCount;
         [_tmpArray addObject:@(k)];
-        totalCount -= k;
+        tTotalCount -= k;
     }
     
     for (int i = 0; i < _numberOfLayers; ++i)
