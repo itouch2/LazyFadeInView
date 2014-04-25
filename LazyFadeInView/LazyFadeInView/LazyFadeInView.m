@@ -9,7 +9,7 @@
 #import "LazyFadeInView.h"
 #import "LazyFadeInLayer.h"
 
-#define __layer ((LazyFadeInView *)self.layer)
+#define __layer ((LazyFadeInLayer *)self.layer)
 
 @implementation LazyFadeInView
 
@@ -23,7 +23,8 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor clearColor];   
+        self.backgroundColor = [UIColor clearColor];
+        self.contentScaleFactor = [[UIScreen mainScreen] scale];
     }
     return self;
 }

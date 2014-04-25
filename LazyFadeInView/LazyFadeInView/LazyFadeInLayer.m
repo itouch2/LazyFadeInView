@@ -15,7 +15,6 @@
 @property (strong, nonatomic) CADisplayLink *displayLink;
 @property (strong, nonatomic) NSMutableArray *alphaArray;
 @property (strong, nonatomic) NSMutableAttributedString *attributedString;
-@property (strong, nonatomic) NSString *text;
 @property (strong, nonatomic) NSMutableArray *tmpArray;
 
 @end
@@ -25,7 +24,6 @@
 @synthesize duration = _duration;
 @synthesize numberOfLayers = _numberOfLayers;
 @synthesize interval = _interval;
-
 
 - (instancetype)init
 {
@@ -38,8 +36,6 @@
         _alphaArray = [NSMutableArray array];
         _tmpArray = [NSMutableArray array];
         _attributedString = [[NSMutableAttributedString alloc] init];
-        
-        self.contentsScale = [[UIScreen mainScreen] scale];
         self.wrapped = YES;
     }
     return self;
@@ -57,11 +53,10 @@
 
 - (void)setText:(NSString *)text
 {
-    
-//    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    //    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     
     _text = text;
-
+    
     _attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
     [self setupAlphaArray];
     
@@ -74,20 +69,31 @@
     
     [self.attributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
     
+    BOOL shouldRemoveTimer = YES;
     for (int i = 0; i < self.text.length; ++i)
     {
         float alpha = [_alphaArray[i] floatValue];
-        alpha = alpha < 0 ? 0 : alpha;
-        alpha = alpha > 1 ? 1 : alpha;
-
+        
+        alpha = alpha < 0.0 ? 0.0 : alpha;
+        alpha = alpha > 1.0 ? 1.0 : alpha;
+        
+        if (alpha != 1.0)
+        {
+            shouldRemoveTimer = NO;
+        }
+        
         UIColor *letterColor = [UIColor colorWithWhite:1 alpha:alpha];
         [self.attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
                                       value:(id)letterColor.CGColor
                                       range:NSMakeRange(i, 1)];
     }
     
-    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("Helvetica"), 20.0, NULL);
+    if (shouldRemoveTimer)
+    {
+        [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    }
     
+    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("HelveticaNeue-Light"), 20.0, NULL);
     [self.attributedString addAttribute:(NSString *)kCTFontAttributeName
                                   value:(__bridge id)helveticaBold
                                   range:NSMakeRange(0, self.text.length)];
@@ -101,7 +107,7 @@
     }
     
     _alphaArray = tAlpha;
-
+    
     self.string = (id)self.attributedString;
 }
 
@@ -120,7 +126,7 @@
 - (void)randomAlphaArray
 {
     NSUInteger totalCount = self.text.length;
-
+    
     int tTotalCount = totalCount;
     [_tmpArray removeAllObjects];
     
@@ -134,7 +140,7 @@
     for (int i = 0; i < _numberOfLayers; ++i)
     {
         int count = [_tmpArray[i] intValue];
-        CGFloat alpha = -(i * 0.2);
+        CGFloat alpha = -(i * 0.25);
         while (count)
         {
             int k = arc4random() % totalCount;
