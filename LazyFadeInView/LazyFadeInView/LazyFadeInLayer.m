@@ -9,7 +9,6 @@
 #import "LazyFadeInLayer.h"
 #import <CoreText/CoreText.h>
 
-
 @interface LazyFadeInLayer ()
 
 @property (strong, nonatomic) CADisplayLink *displayLink;
@@ -41,32 +40,32 @@
     return self;
 }
 
-- (CADisplayLink *)displayLink
+- (void)setText:(NSString *)text
 {
-    if (!_displayLink)
+    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    
+    if (!text)
     {
+        _text = @" ";
+    }
+    else
+    {
+        _text = text;
+    }
+    
+    _attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
+    
+    if (_text.length != 0)
+    {
+        [self setupAlphaArray];
+        
         _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(frameUpdate:)];
         [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
     }
-    return _displayLink;
-}
-
-- (void)setText:(NSString *)text
-{
-    //    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
-    
-    _text = text;
-    
-    _attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
-    [self setupAlphaArray];
-    
-    _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(frameUpdate:)];
-    [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 
 - (void)frameUpdate:(id)sender
 {
-    
     [self.attributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
     
     BOOL shouldRemoveTimer = YES;
@@ -87,10 +86,11 @@
                                       value:(id)letterColor.CGColor
                                       range:NSMakeRange(i, 1)];
     }
-    
+
     if (shouldRemoveTimer)
     {
         [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        _displayLink = nil;
     }
     
     CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("HelveticaNeue-Light"), 20.0, NULL);
@@ -101,7 +101,7 @@
     NSMutableArray *tAlpha = [NSMutableArray array];
     for (int i = 0; i < _alphaArray.count; ++i)
     {
-        float newAlpha = [_alphaArray[i] floatValue] + (1.0 / 50);
+        float newAlpha = [_alphaArray[i] floatValue] + (1.0 / 40);
         
         [tAlpha addObject:@(newAlpha)];
     }
@@ -126,16 +126,23 @@
 - (void)randomAlphaArray
 {
     NSUInteger totalCount = self.text.length;
-    
-    int tTotalCount = totalCount;
+    NSUInteger tTotalCount = totalCount;
     [_tmpArray removeAllObjects];
     
-    for (int i = 0; i < _numberOfLayers; ++i)
+    for (int i = 0; i < _numberOfLayers - 1; ++i)
     {
         int k = arc4random() % tTotalCount;
         [_tmpArray addObject:@(k)];
         tTotalCount -= k;
     }
+     [_tmpArray addObject:@(tTotalCount)];
+    
+    
+    for (id value in _tmpArray)
+    {
+        NSLog(@"%@", value);
+    }
+    
     
     for (int i = 0; i < _numberOfLayers; ++i)
     {
@@ -150,6 +157,11 @@
                 count--;
             }
         }
+    }
+    
+    for (id value in _alphaArray)
+    {
+        NSLog(@"%@", value);
     }
 }
 
