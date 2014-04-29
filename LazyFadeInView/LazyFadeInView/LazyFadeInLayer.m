@@ -21,44 +21,33 @@
 
 @property (strong, nonatomic) NSMutableArray *tmpArray;
 
-@property (nonatomic) CFTimeInterval previousTimestamp;
+@property (nonatomic) NSUInteger frameCount;
 
 @end
 
 @implementation LazyFadeInLayer
 
-@synthesize duration = _duration;
 @synthesize numberOfLayers = _numberOfLayers;
 @synthesize interval = _interval;
 @synthesize textColor = _textColor, textFont = _textFont;
-@synthesize repeat = _repeat, text = _text;
+@synthesize text = _text;
 
 - (instancetype)init
 {
     self = [super init];
     if (self)
     {
-        _duration = 1.f;
         _numberOfLayers = 6;
-        _interval = 0.2;
+        _interval = 0.03;
         _alphaArray = [NSMutableArray array];
         _tmpArray = [NSMutableArray array];
-        _textFont = [UIFont systemFontOfSize:20.0f];
+        _textFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
         _textColor = [UIColor whiteColor];
-        _repeat = NO;
         
         self.contentsScale = [[UIScreen mainScreen] scale];
         self.wrapped = YES;
     }
     return self;
-}
-
-- (void)setDuration:(CFTimeInterval)duration
-{
-    if (duration != _duration) {
-        _duration = duration;
-        [self _updateAnimation];
-    }
 }
 
 - (void)setNumberOfLayers:(NSUInteger)numberOfLayers
@@ -85,10 +74,10 @@
     }
 }
 
-- (void)setRepeat:(BOOL)repeat
+- (void)setInterval:(CFTimeInterval)interval
 {
-    if (_repeat != repeat) {
-        _repeat = repeat;
+    if (_interval != interval) {
+        _interval = interval;
         [self _updateAnimation];
     }
 }
@@ -108,64 +97,50 @@
 
 - (void)_updateAnimation
 {
-    if (self.text && self.text.length != 0) {
+    if (_text && _text.length != 0) {
         if (self.isAnimating) {
-            [self stopAnimating];
+            [self _stopAnimating];
         }
-        [self startAnimating];
+        [self _startAnimating];
     }
 }
 
-- (void)startAnimating
+- (void)_startAnimating
 {
-    if (self.text.length == 0) {
+    if (_text.length == 0) {
         return;
     }
     
-    [self setupAlphaArray];
+    [self _setupAlphaArray];
     
-    self.attributedString = [[NSMutableAttributedString alloc] initWithString:self.text];
+    self.attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
     
-    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)self.textFont.fontName, self.textFont.pointSize, NULL);
-    [self.attributedString addAttribute:(NSString *)kCTFontAttributeName
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)_textFont.fontName, _textFont.pointSize, NULL);
+    [_attributedString addAttribute:(NSString *)kCTFontAttributeName
                                            value:(__bridge id)fontRef
-                                           range:NSMakeRange(0, self.text.length)];
-    [self.attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)self.textColor.CGColor range:NSMakeRange(0, self.text.length)];
+                                           range:NSMakeRange(0, _text.length)];
+    [_attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)_textColor.CGColor range:NSMakeRange(0, _text.length)];
+    CFRelease(fontRef);
     
-    self.previousTimestamp = CFAbsoluteTimeGetCurrent();
-    self.animatingAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedString];
+    _frameCount = 0;
+    _animatingAttributedString = [[NSMutableAttributedString alloc] initWithAttributedString:_attributedString];
     
     _isAnimating = YES;
-    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(frameUpdate:)];
-    [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    self.displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(_frameUpdate:)];
+    [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
 }
 
-- (void)stopAnimating
+- (void)_stopAnimating
 {
     _isAnimating = NO;
-    self.string = self.attributedString;
-    [self.displayLink invalidate];
+    self.string = _attributedString;
+    [_displayLink invalidate];
     self.displayLink = nil;
-    
-    if (self.repeat) {
-        [self startAnimating];
-    }
 }
 
-- (void)frameUpdate:(id)sender
+- (void)_frameUpdate:(id)sender
 {
-    CFTimeInterval now = CFAbsoluteTimeGetCurrent();
-    CFTimeInterval elapsed = now - self.previousTimestamp;
-    
-    if (self.duration <= 0 || elapsed > self.duration) {
-        [self stopAnimating];
-        return;
-
-    }
-    
-    CGFloat timeProportion = elapsed / self.duration;
-    
-    [self.animatingAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
+    _frameCount++;
     
     BOOL isFinished = YES;
     
@@ -174,115 +149,97 @@
     CGFloat toColorG = 0.0f;
     CGFloat toColorB = 0.0f;
     
-    [self.textColor getRed:&toColorR green:&toColorG blue:&toColorB alpha:&toColorAlpha];
-//=======
-//    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("HelveticaNeue-Light"), 20.0, NULL);
-//    [self.attributedString addAttribute:(NSString *)kCTFontAttributeName
-//                                  value:(__bridge id)helveticaBold
-//                                  range:NSMakeRange(0, self.text.length)];
-//>>>>>>> FETCH_HEAD
+    [_textColor getRed:&toColorR green:&toColorG blue:&toColorB alpha:&toColorAlpha];
     
-    for (int i = 0; i < self.text.length; ++i)
+    for (int i = 0; i < _text.length; ++i)
     {
-        CGFloat byColorAlpha = (toColorAlpha - [_alphaArray[i] floatValue]) * timeProportion;
-        CGFloat currentColorAlpha = [_alphaArray[i] floatValue] + byColorAlpha;
-        if (byColorAlpha <= 0.0f || currentColorAlpha >= toColorAlpha) {
-            continue;
+        CGFloat currentColorAlpha = [_alphaArray[i] floatValue] + _frameCount * _interval;
+        if (isFinished && currentColorAlpha < toColorAlpha) {
+            isFinished = NO;
         }
-        
-        isFinished = NO;
-        
         UIColor *currentColor = [UIColor colorWithRed:toColorR green:toColorG blue:toColorB alpha:currentColorAlpha];
-        [self.animatingAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
-                                      value:(id)currentColor.CGColor
-                                      range:NSMakeRange(i, 1)];
+        [_animatingAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
+                                           value:(id)currentColor.CGColor
+                                           range:NSMakeRange(i, 1)];
+
     }
     
     if (isFinished) {
-        [self stopAnimating];
+        [self _stopAnimating];
         return;
     }
     
-    self.string = (id)self.animatingAttributedString;
+    self.string = (id)_animatingAttributedString;
 }
 
-- (void)setupAlphaArray
+- (void)_setupAlphaArray
 {
-    if (!self.text.length) {
+    if (!_text.length) {
         return;
     }
     
-    if (self.alphaArray.count) {
-        if (self.text.length != self.alphaArray.count) {
-            [self resetAlphaArray];
+    if (_alphaArray.count) {
+        if (_text.length != _alphaArray.count) {
+            [self _resetAlphaArray];
         }
     }
     else{
-        [self resetAlphaArray];
+        [self _resetAlphaArray];
     }
 }
 
-- (void)resetAlphaArray
+- (void)_resetAlphaArray
 {
-    [self.alphaArray removeAllObjects];
-    self.alphaArray = [NSMutableArray arrayWithCapacity:self.text.length];
-    for (int i = 0; i < self.text.length; ++i)
+    [_alphaArray removeAllObjects];
+    self.alphaArray = [NSMutableArray arrayWithCapacity:_text.length];
+    for (int i = 0; i < _text.length; ++i)
     {
-        [self.alphaArray addObject:@(MAXFLOAT)];
+        [_alphaArray addObject:@(MAXFLOAT)];
     }
     
-    [self randomAlphaArray];
+    [self _randomAlphaArray];
 }
 
-- (void)randomAlphaArray
+- (void)_randomAlphaArray
 {
-    if (!self.text.length && self.numberOfLayers <= 0) {
+    if (!_text.length && _numberOfLayers <= 0) {
         return;
     }
     
-    NSUInteger totalCount = self.text.length;
+    NSUInteger totalCount = _text.length;
 
     NSUInteger tTotalCount = totalCount;
-    [self.tmpArray removeAllObjects];
-    self.tmpArray = [NSMutableArray arrayWithCapacity:self.numberOfLayers];
+    [_tmpArray removeAllObjects];
+    self.tmpArray = [NSMutableArray arrayWithCapacity:_numberOfLayers];
     
-    for (int i = 0; i < self.numberOfLayers; ++i)
+    for (int i = 0; i < _numberOfLayers; ++i)
     {
         int k = arc4random() % tTotalCount;
-        [self.tmpArray addObject:@(k)];
+        [_tmpArray addObject:@(k)];
         if (tTotalCount < k) {
             break;
         }
         tTotalCount -= k;
     }
-     [_tmpArray addObject:@(tTotalCount)];
     
-    
-    for (id value in _tmpArray)
-    {
-        NSLog(@"%@", value);
-    }
-    
-    
-    for (int i = 0; i < self.tmpArray.count; ++i)
+    for (int i = 0; i < _tmpArray.count; ++i)
     {
         int count = [_tmpArray[i] intValue];
         CGFloat alpha = -(i * 0.25);
         while (count)
         {
             int k = arc4random() % totalCount;
-            if ([self.alphaArray[k] floatValue] > 0.0f)
+            if ([_alphaArray[k] floatValue] > 0.0f)
             {
-                self.alphaArray[k] = @(alpha);
-                count--;
+                _alphaArray[k] = @(alpha);
             }
+            count--;
         }
     }
     
-    for (id value in _alphaArray)
-    {
-        NSLog(@"%@", value);
-    }
+#ifdef DEBUG
+    NSLog(@"%@",_alphaArray);
+#endif
 }
 
 @end

@@ -10,16 +10,13 @@
 
 @protocol LazyFadeIn <NSObject>
 
-//! @abstract The duration of the complete fading. Defaults to 1.0.
-@property (assign, nonatomic, readwrite) CFTimeInterval duration;
-
-//! @abstract The number of layers lazy loading. Defaults to 3.
+//! @abstract The number of layers lazy loading. Defaults to 6.
 @property (assign, nonatomic, readwrite) NSUInteger numberOfLayers;
 
-//! @abstract The interval of layers fading. Defaults to 0.2
+//! @abstract The interval of layers fading. Defaults to 0.03
 @property (assign, nonatomic, readwrite) CFTimeInterval interval;
 
-//! @abstract The font of text. Defaults to [UIFont systemFontOfSize:20.0f]
+//! @abstract The font of text. Defaults to [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f]
 @property (strong, nonatomic, readwrite) UIFont *textFont;
 
 //! @abstract The color of text. Defaults to white color
@@ -27,9 +24,6 @@
 
 //! @abstract Text. Defaults to nil
 @property (strong, nonatomic, readwrite) NSString *text;
-
-//! @abstract Determine whether the animation should repeat
-@property (assign, nonatomic, readwrite) BOOL repeat;
 
 @end
 
