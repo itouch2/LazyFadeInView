@@ -9,9 +9,31 @@
 #import "LazyFadeInView.h"
 #import "LazyFadeInLayer.h"
 
-#define __layer ((LazyFadeInView *)self.layer)
+#define __layer ((LazyFadeInLayer *)self.layer)
+
+#define LAYER_ACCESSOR(accessor, ctype) \
+- (ctype)accessor { \
+return [__layer accessor]; \
+}
+
+#define LAYER_MUTATOR(mutator, ctype) \
+- (void)mutator (ctype)value { \
+[__layer mutator value]; \
+}
+
+#define LAYER_RW_PROPERTY(accessor, mutator, ctype) \
+LAYER_ACCESSOR (accessor, ctype) \
+LAYER_MUTATOR (mutator, ctype)
 
 @implementation LazyFadeInView
+
+LAYER_RW_PROPERTY(duration, setDuration:, CFTimeInterval)
+LAYER_RW_PROPERTY(numberOfLayers, setNumberOfLayers:, NSUInteger)
+LAYER_RW_PROPERTY(interval, setInterval:, CFTimeInterval)
+LAYER_RW_PROPERTY(textFont, setTextFont:, UIFont *)
+LAYER_RW_PROPERTY(textColor, setTextColor:, UIColor *)
+LAYER_RW_PROPERTY(text,setText:,NSString *)
+LAYER_RW_PROPERTY(repeat, setRepeat:, BOOL)
 
 + (Class)layerClass
 {
@@ -23,14 +45,9 @@
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor clearColor];   
+        self.backgroundColor = [UIColor clearColor];
+        self.layer.contentsScale = [UIScreen mainScreen].scale;
     }
     return self;
 }
-
-- (void)setText:(NSString *)text
-{
-    __layer.text = text;
-}
-
 @end

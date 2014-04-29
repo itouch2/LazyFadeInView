@@ -7,12 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "LazyFadeIn.h"
 
-@interface LazyFadeInView : UIView
-
-@property (strong, nonatomic) UIFont *font;
-@property (assign, nonatomic) CGFloat fontSize;
-@property (strong, nonatomic) NSString *text;
+@interface LazyFadeInView : UIView<LazyFadeIn>
 
 
 @end

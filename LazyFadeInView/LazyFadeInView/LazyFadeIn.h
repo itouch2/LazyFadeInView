@@ -19,5 +19,17 @@
 //! @abstract The interval of layers fading. Defaults to 0.2
 @property (assign, nonatomic, readwrite) CFTimeInterval interval;
 
+//! @abstract The font of text. Defaults to [UIFont systemFontOfSize:20.0f]
+@property (strong, nonatomic, readwrite) UIFont *textFont;
+
+//! @abstract The color of text. Defaults to white color
+@property (strong, nonatomic, readwrite) UIColor *textColor;
+
+//! @abstract Text. Defaults to nil
+@property (strong, nonatomic, readwrite) NSString *text;
+
+//! @abstract Determine whether the animation should repeat
+@property (assign, nonatomic, readwrite) BOOL repeat;
+
 @end
 
