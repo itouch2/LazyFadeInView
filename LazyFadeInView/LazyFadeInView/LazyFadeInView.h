@@ -9,12 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "LazyFadeIn.h"
 
-<<<<<<< HEAD
-@interface LazyFadeInView : UIView<LazyFadeIn>
-=======
-@interface LazyFadeInView : UIView
 
-@property (strong, nonatomic) NSString *text;
->>>>>>> FETCH_HEAD
+@interface LazyFadeInView : UIView<LazyFadeIn>
 
 @end

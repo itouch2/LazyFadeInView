@@ -25,7 +25,7 @@ static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-<<<<<<< HEAD
+
 	// Do any additional setup after loading the view, typically from a nib.
     LazyFadeInView *fade = [[LazyFadeInView alloc] initWithFrame:CGRectMake(11.5, 101.5, 300, 200)];
     fade.textFont = [UIFont systemFontOfSize:17.0f];
@@ -34,13 +34,7 @@ static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月
     fade.text = @"Stray birds of summer come to my window to sing and fly away. And yellow leaves of autumn, which have no songs, flutter and fall there with a sign. O Troupe of little vagrants of the world, leave your footprints in my words.";
     [self.view addSubview:fade];
     self.view.backgroundColor = [UIColor whiteColor];
-=======
-    
-    self.view.backgroundColor = [UIColor blackColor];
-    
-    self.fadeInView = [[LazyFadeInView alloc] initWithFrame:CGRectMake(20, 120, 280, 200)];
-//    self.fadeInView.text = kStrayBirds;
-    [self.view addSubview:self.fadeInView];
+    self.fadeInView = fade;
 }
 
 - (IBAction)setTextBtnClicked:(id)sender
@@ -67,7 +61,6 @@ static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月
     {
         self.view.backgroundColor = [UIColor blackColor];
     }
->>>>>>> FETCH_HEAD
 }
 
 - (void)didReceiveMemoryWarning

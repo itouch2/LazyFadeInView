@@ -11,6 +11,4 @@
 
 @interface LazyFadeInLayer : CATextLayer <LazyFadeIn>
 
-@property (strong, nonatomic) NSString *text;
-
 @end
