@@ -9,7 +9,6 @@
 #import "LazyFadeInLayer.h"
 #import <CoreText/CoreText.h>
 
-
 @interface LazyFadeInLayer ()
 {
     BOOL _isAnimating;
@@ -18,8 +17,11 @@
 @property (strong, nonatomic) CADisplayLink *displayLink;
 @property (strong, nonatomic) NSMutableArray *alphaArray;
 @property (strong, nonatomic) NSMutableAttributedString *attributedString;
+<<<<<<< HEAD
 @property (strong, nonatomic) NSMutableAttributedString *animatingAttributedString;
 
+=======
+>>>>>>> FETCH_HEAD
 @property (strong, nonatomic) NSMutableArray *tmpArray;
 
 @property (nonatomic) CFTimeInterval previousTimestamp;
@@ -34,7 +36,6 @@
 @synthesize textColor = _textColor, textFont = _textFont;
 @synthesize repeat = _repeat, text = _text;
 
-
 - (instancetype)init
 {
     self = [super init];
@@ -45,16 +46,21 @@
         _interval = 0.2;
         _alphaArray = [NSMutableArray array];
         _tmpArray = [NSMutableArray array];
+<<<<<<< HEAD
         _textFont = [UIFont systemFontOfSize:20.0f];
         _textColor = [UIColor whiteColor];
         _repeat = NO;
         
         self.contentsScale = [[UIScreen mainScreen] scale];
+=======
+        _attributedString = [[NSMutableAttributedString alloc] init];
+>>>>>>> FETCH_HEAD
         self.wrapped = YES;
     }
     return self;
 }
 
+<<<<<<< HEAD
 - (void)setDuration:(CFTimeInterval)duration
 {
     if (duration != _duration) {
@@ -151,19 +157,71 @@
     
     if (self.repeat) {
         [self startAnimating];
+=======
+- (void)setText:(NSString *)text
+{
+    [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+    
+    if (!text)
+    {
+        _text = @" ";
+    }
+    else
+    {
+        _text = text;
+    }
+    
+    _attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
+    
+    if (_text.length != 0)
+    {
+        [self setupAlphaArray];
+        
+        _displayLink = [CADisplayLink displayLinkWithTarget:self selector:@selector(frameUpdate:)];
+        [_displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+>>>>>>> FETCH_HEAD
     }
 }
 
 - (void)frameUpdate:(id)sender
 {
+<<<<<<< HEAD
     CFTimeInterval now = CFAbsoluteTimeGetCurrent();
     CFTimeInterval elapsed = now - self.previousTimestamp;
     
     if (self.duration <= 0 || elapsed > self.duration) {
         [self stopAnimating];
         return;
+=======
+    [self.attributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
+    
+    BOOL shouldRemoveTimer = YES;
+    for (int i = 0; i < self.text.length; ++i)
+    {
+        float alpha = [_alphaArray[i] floatValue];
+        
+        alpha = alpha < 0.0 ? 0.0 : alpha;
+        alpha = alpha > 1.0 ? 1.0 : alpha;
+        
+        if (alpha != 1.0)
+        {
+            shouldRemoveTimer = NO;
+        }
+        
+        UIColor *letterColor = [UIColor colorWithWhite:1 alpha:alpha];
+        [self.attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
+                                      value:(id)letterColor.CGColor
+                                      range:NSMakeRange(i, 1)];
+>>>>>>> FETCH_HEAD
+    }
+
+    if (shouldRemoveTimer)
+    {
+        [_displayLink removeFromRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        _displayLink = nil;
     }
     
+<<<<<<< HEAD
     CGFloat timeProportion = elapsed / self.duration;
     
     [self.animatingAttributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, self.text.length)];
@@ -176,9 +234,16 @@
     CGFloat toColorB = 0.0f;
     
     [self.textColor getRed:&toColorR green:&toColorG blue:&toColorB alpha:&toColorAlpha];
+=======
+    CTFontRef helveticaBold = CTFontCreateWithName(CFSTR("HelveticaNeue-Light"), 20.0, NULL);
+    [self.attributedString addAttribute:(NSString *)kCTFontAttributeName
+                                  value:(__bridge id)helveticaBold
+                                  range:NSMakeRange(0, self.text.length)];
+>>>>>>> FETCH_HEAD
     
     for (int i = 0; i < self.text.length; ++i)
     {
+<<<<<<< HEAD
         CGFloat byColorAlpha = (toColorAlpha - [_alphaArray[i] floatValue]) * timeProportion;
         CGFloat currentColorAlpha = [_alphaArray[i] floatValue] + byColorAlpha;
         if (byColorAlpha <= 0.0f || currentColorAlpha >= toColorAlpha) {
@@ -186,6 +251,9 @@
         }
         
         isFinished = NO;
+=======
+        float newAlpha = [_alphaArray[i] floatValue] + (1.0 / 40);
+>>>>>>> FETCH_HEAD
         
         UIColor *currentColor = [UIColor colorWithRed:toColorR green:toColorG blue:toColorB alpha:currentColorAlpha];
         [self.animatingAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
@@ -193,12 +261,18 @@
                                       range:NSMakeRange(i, 1)];
     }
     
+<<<<<<< HEAD
     if (isFinished) {
         [self stopAnimating];
         return;
     }
     
     self.string = (id)self.animatingAttributedString;
+=======
+    _alphaArray = tAlpha;
+    
+    self.string = (id)self.attributedString;
+>>>>>>> FETCH_HEAD
 }
 
 - (void)setupAlphaArray
@@ -236,12 +310,19 @@
     }
     
     NSUInteger totalCount = self.text.length;
+<<<<<<< HEAD
 
     NSUInteger tTotalCount = totalCount;
     [self.tmpArray removeAllObjects];
     self.tmpArray = [NSMutableArray arrayWithCapacity:self.numberOfLayers];
     
     for (int i = 0; i < self.numberOfLayers; ++i)
+=======
+    NSUInteger tTotalCount = totalCount;
+    [_tmpArray removeAllObjects];
+    
+    for (int i = 0; i < _numberOfLayers - 1; ++i)
+>>>>>>> FETCH_HEAD
     {
         int k = arc4random() % tTotalCount;
         [self.tmpArray addObject:@(k)];
@@ -250,11 +331,24 @@
         }
         tTotalCount -= k;
     }
+     [_tmpArray addObject:@(tTotalCount)];
+    
+    
+    for (id value in _tmpArray)
+    {
+        NSLog(@"%@", value);
+    }
+    
     
     for (int i = 0; i < self.tmpArray.count; ++i)
     {
+<<<<<<< HEAD
         int count = [self.tmpArray[i] intValue];
         CGFloat alpha = -(i * 0.2);
+=======
+        int count = [_tmpArray[i] intValue];
+        CGFloat alpha = -(i * 0.25);
+>>>>>>> FETCH_HEAD
         while (count)
         {
             int k = arc4random() % totalCount;
@@ -264,6 +358,11 @@
                 count--;
             }
         }
+    }
+    
+    for (id value in _alphaArray)
+    {
+        NSLog(@"%@", value);
     }
 }
 

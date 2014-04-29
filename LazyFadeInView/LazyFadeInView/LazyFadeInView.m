@@ -10,6 +10,7 @@
 #import "LazyFadeInLayer.h"
 
 #define __layer ((LazyFadeInLayer *)self.layer)
+<<<<<<< HEAD
 
 #define LAYER_ACCESSOR(accessor, ctype) \
 - (ctype)accessor { \
@@ -24,6 +25,8 @@ return [__layer accessor]; \
 #define LAYER_RW_PROPERTY(accessor, mutator, ctype) \
 LAYER_ACCESSOR (accessor, ctype) \
 LAYER_MUTATOR (mutator, ctype)
+=======
+>>>>>>> FETCH_HEAD
 
 @implementation LazyFadeInView
 
@@ -46,7 +49,11 @@ LAYER_RW_PROPERTY(repeat, setRepeat:, BOOL)
     if (self)
     {
         self.backgroundColor = [UIColor clearColor];
+<<<<<<< HEAD
         self.layer.contentsScale = [UIScreen mainScreen].scale;
+=======
+        self.contentScaleFactor = [[UIScreen mainScreen] scale];
+>>>>>>> FETCH_HEAD
     }
     return self;
 }
