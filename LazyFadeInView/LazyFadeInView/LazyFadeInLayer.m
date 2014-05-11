@@ -9,6 +9,16 @@
 #import "LazyFadeInLayer.h"
 #import <CoreText/CoreText.h>
 
+#define LAYER_UPDATE_ANIMATION_MUTATOR(mutator,ctype,propertyName)  \
+- (void)mutator (ctype)propertyName     \
+{                                       \
+if (_##propertyName != propertyName) {\
+_##propertyName = propertyName;   \
+[self _updateAnimation];        \
+}                                   \
+}
+
+
 @interface LazyFadeInLayer ()
 {
     BOOL _isAnimating;
@@ -30,7 +40,7 @@
 @synthesize numberOfLayers = _numberOfLayers;
 @synthesize interval = _interval;
 @synthesize textColor = _textColor, textFont = _textFont;
-@synthesize text = _text;
+@synthesize text = _text,attributes = _attributes;
 
 - (instancetype)init
 {
@@ -50,45 +60,13 @@
     return self;
 }
 
-- (void)setNumberOfLayers:(NSUInteger)numberOfLayers
-{
-    if (_numberOfLayers != numberOfLayers) {
-        _numberOfLayers = numberOfLayers;
-        [self _updateAnimation];
-    }
-}
+LAYER_UPDATE_ANIMATION_MUTATOR(setNumberOfLayers:,NSUInteger,numberOfLayers)
+LAYER_UPDATE_ANIMATION_MUTATOR(setText:, NSString *, text)
+LAYER_UPDATE_ANIMATION_MUTATOR(setTextColor:, UIColor *, textColor)
+LAYER_UPDATE_ANIMATION_MUTATOR(setInterval:, CFTimeInterval, interval)
+LAYER_UPDATE_ANIMATION_MUTATOR(setTextFont:, UIFont *, textFont)
+LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
 
-- (void)setText:(NSString *)text
-{
-    if (text != _text) {
-        _text = text;
-        [self _updateAnimation];
-    }
-}
-
-- (void)setTextColor:(UIColor *)textColor
-{
-    if (textColor != _textColor) {
-        _textColor = textColor;
-        [self _updateAnimation];
-    }
-}
-
-- (void)setInterval:(CFTimeInterval)interval
-{
-    if (_interval != interval) {
-        _interval = interval;
-        [self _updateAnimation];
-    }
-}
-
-- (void)setTextFont:(UIFont *)textFont
-{
-    if (textFont != _textFont) {
-        _textFont = textFont;
-        [self _updateAnimation];
-    }
-}
 
 - (BOOL)isAnimating
 {
@@ -103,6 +81,34 @@
         }
         [self _startAnimating];
     }
+    else{
+        if (self.isAnimating) {
+            [self _stopAnimating];
+        }
+    }
+}
+
+- (void)_handleParagraphStyle
+{
+    id style = [_attributes objectForKey:(NSString *)kCTParagraphStyleAttributeName];
+    CTParagraphStyleRef paragraphStyle = (__bridge CTParagraphStyleRef)(style);
+    if (paragraphStyle) {
+        CTTextAlignment textAlignment = kCTTextAlignmentNatural;
+        CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(textAlignment), &textAlignment);
+        if (textAlignment == kCTTextAlignmentLeft) {
+            self.alignmentMode = kCAAlignmentLeft;
+        }else if (textAlignment == kCTTextAlignmentRight){
+            self.alignmentMode = kCAAlignmentRight;
+        }else if (textAlignment == kCTTextAlignmentCenter){
+            self.alignmentMode = kCAAlignmentCenter;
+        }else if (textAlignment == kCTTextAlignmentJustified){
+            self.alignmentMode = kCAAlignmentJustified;
+        }else if (textAlignment == kCTTextAlignmentNatural){
+            self.alignmentMode = kCAAlignmentNatural;
+        }
+    }else{
+        self.alignmentMode = kCAAlignmentNatural;
+    }
 }
 
 - (void)_startAnimating
@@ -113,7 +119,12 @@
     
     [self _setupAlphaArray];
     
-    self.attributedString = [[NSMutableAttributedString alloc] initWithString:_text];
+    self.attributedString = [[NSMutableAttributedString alloc] initWithString:_text attributes:_attributes];
+    [self.attributedString removeAttribute:(NSString *)kCTFontAttributeName range:NSMakeRange(0, _text.length)];
+    [self.attributedString removeAttribute:(NSString *)kCTForegroundColorAttributeName range:NSMakeRange(0, _text.length)];
+    
+    //CATextLaye does not support NSParagraphStyleAttributeName or kCTParagraphStyleAttributeName
+    [self _handleParagraphStyle];
     
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)_textFont.fontName, _textFont.pointSize, NULL);
     [_attributedString addAttribute:(NSString *)kCTFontAttributeName

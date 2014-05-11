@@ -25,5 +25,8 @@
 //! @abstract Text. Defaults to nil
 @property (strong, nonatomic, readwrite) NSString *text;
 
+//! @abstract The attributes of text. Defaults to nil.
+@property (strong, nonatomic, readwrite) NSDictionary *attributes;
+
 @end
 
