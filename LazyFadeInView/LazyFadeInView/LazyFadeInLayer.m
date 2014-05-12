@@ -10,12 +10,12 @@
 #import <CoreText/CoreText.h>
 
 #define LAYER_UPDATE_ANIMATION_MUTATOR(mutator,ctype,propertyName)  \
-- (void)mutator (ctype)propertyName     \
-{                                       \
-if (_##propertyName != propertyName) {\
-_##propertyName = propertyName;   \
-[self _updateAnimation];        \
-}                                   \
+- (void)mutator (ctype)propertyName \
+{ \
+    if (_##propertyName != propertyName) { \
+        _##propertyName = propertyName; \
+        [self _updateAnimation]; \
+    } \
 }
 
 
@@ -76,13 +76,16 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
 - (void)_updateAnimation
 {
     if (_text && _text.length != 0) {
-        if (self.isAnimating) {
+        if (self.isAnimating)
+        {
             [self _stopAnimating];
         }
         [self _startAnimating];
     }
-    else{
-        if (self.isAnimating) {
+    else
+    {
+        if (self.isAnimating)
+        {
             [self _stopAnimating];
         }
     }
@@ -92,21 +95,33 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
 {
     id style = [_attributes objectForKey:(NSString *)kCTParagraphStyleAttributeName];
     CTParagraphStyleRef paragraphStyle = (__bridge CTParagraphStyleRef)(style);
-    if (paragraphStyle) {
+    if (paragraphStyle)
+    {
         CTTextAlignment textAlignment = kCTTextAlignmentNatural;
         CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(textAlignment), &textAlignment);
-        if (textAlignment == kCTTextAlignmentLeft) {
+        if (textAlignment == kCTTextAlignmentLeft)
+        {
             self.alignmentMode = kCAAlignmentLeft;
-        }else if (textAlignment == kCTTextAlignmentRight){
+        }
+        else if (textAlignment == kCTTextAlignmentRight)
+        {
             self.alignmentMode = kCAAlignmentRight;
-        }else if (textAlignment == kCTTextAlignmentCenter){
+        }
+        else if (textAlignment == kCTTextAlignmentCenter)
+        {
             self.alignmentMode = kCAAlignmentCenter;
-        }else if (textAlignment == kCTTextAlignmentJustified){
+        }
+        else if (textAlignment == kCTTextAlignmentJustified)
+        {
             self.alignmentMode = kCAAlignmentJustified;
-        }else if (textAlignment == kCTTextAlignmentNatural){
+        }
+        else if (textAlignment == kCTTextAlignmentNatural)
+        {
             self.alignmentMode = kCAAlignmentNatural;
         }
-    }else{
+    }
+    else
+    {
         self.alignmentMode = kCAAlignmentNatural;
     }
 }

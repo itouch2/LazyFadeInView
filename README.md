@@ -9,6 +9,7 @@ An example of making a lazy fade in view:
 ```objective-c
 LazyFadeInView *fadeInView = [[LazyFadeInView alloc] initWithFrame:CGRectMake(20, 120, 280, 200)];
 self.fadeInView.text = @"Stray birds of summer come to my window to sing and fly away.";
+self.fadeInView.textColor = [UIColor whiteColor];
 [self.view addSubview:self.fadeInView];
 ```
 
@@ -22,9 +23,6 @@ pod 'LazyFadeInView', '~> 0.1.0'
 
 and run `pod install`, then you're all done!
 
-
-
 ## A Quick Peek
 
 ![screenshots](https://cloud.githubusercontent.com/assets/4316898/2808172/95280184-cd14-11e3-876b-ac00ba78fbc9.gif)
-
