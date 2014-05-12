@@ -12,18 +12,6 @@ self.fadeInView.text = @"Stray birds of summer come to my window to sing and fly
 [self.view addSubview:self.fadeInView];
 ```
 
-## Podfile
-
-[CocosPods](http://cocosPods.org) is the recommended method to install LazyFadeInView, just add the following line to `Podfile`
-
-```
-pod 'LazyFadeInView', '~> 0.1.0'
-```
-
-and run `pod install`, then you're all done!
-
-
-
 ## A Quick Peek
 
 ![screenshots](https://cloud.githubusercontent.com/assets/4316898/2808172/95280184-cd14-11e3-876b-ac00ba78fbc9.gif)
