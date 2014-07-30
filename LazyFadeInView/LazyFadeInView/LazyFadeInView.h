@@ -9,7 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "LazyFadeIn.h"
 
+@class LazyFadeInView;
+
+@protocol LazyFadeInViewDelegate <NSObject>
+
+- (void)fadeInAnimationDidEnd:(LazyFadeInView *)fadeInView;
+
+@end
 
 @interface LazyFadeInView : UIView<LazyFadeIn>
+
+@property (weak, nonatomic) id<LazyFadeInViewDelegate> delegate;
 
 @end

@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "LazyFadeInView/LazyFadeInView/LazyFadeInLayer.m"
-            timestampString = "420188932.21986"
+            filePath = "LazyFadeInView/LazyFadeInView/LazyFadeInView.m"
+            timestampString = "428401480.666444"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "111"
-            endingLineNumber = "111"
-            landmarkName = "-_startAnimating"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
+            landmarkName = "-lazyFadeInLayerAnimationDidStop"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

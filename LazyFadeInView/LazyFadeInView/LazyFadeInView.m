@@ -46,7 +46,17 @@ LAYER_RW_PROPERTY(attributes, setAttributes:, NSDictionary *)
     {
         self.backgroundColor = [UIColor clearColor];
         self.layer.contentsScale = [UIScreen mainScreen].scale;
+        ((LazyFadeInLayer *)self.layer).sourceView = self;
     }
     return self;
 }
+
+- (void)lazyFadeInLayerAnimationDidEnd
+{
+    if ([self.delegate respondsToSelector:@selector(fadeInAnimationDidEnd:)])
+    {
+        [self.delegate fadeInAnimationDidEnd:self];
+    }
+}
+
 @end

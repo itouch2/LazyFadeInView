@@ -13,7 +13,7 @@ static NSString * const kStrayBirds = @"Stray birds of summer come to my window 
 
 static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月，耳得之而为声，目遇之而成色。取之无禁，用之不竭。是造物者之无尽藏也，而吾与子之所共适。";
 
-@interface ViewController ()
+@interface ViewController () <LazyFadeInViewDelegate>
 
 @property (strong, nonatomic) LazyFadeInView *fadeInView;
 @property (assign, nonatomic) BOOL flag;
@@ -28,11 +28,17 @@ static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月
 
 	// Do any additional setup after loading the view, typically from a nib.
     LazyFadeInView *fade = [[LazyFadeInView alloc] initWithFrame:CGRectMake(10, 100, 300, 200)];
+    fade.delegate = self;
     fade.textColor = [UIColor whiteColor];
     fade.text = @"Stray birds of summer come to my window to sing and fly away. And yellow leaves of autumn, which have no songs, flutter and fall there with a sign. O Troupe of little vagrants of the world, leave your footprints in my words.";
     [self.view addSubview:fade];
     self.view.backgroundColor = [UIColor blackColor];
     self.fadeInView = fade;
+}
+
+- (void)fadeInAnimationDidEnd:(LazyFadeInView *)fadeInView
+{
+    NSLog(@"%@ fade in animation completed.", fadeInView);
 }
 
 - (IBAction)setTextBtnClicked:(id)sender

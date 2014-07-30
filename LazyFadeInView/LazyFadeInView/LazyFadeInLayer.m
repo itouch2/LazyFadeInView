@@ -18,7 +18,6 @@
     } \
 }
 
-
 @interface LazyFadeInLayer ()
 {
     BOOL _isAnimating;
@@ -66,7 +65,6 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setTextColor:, UIColor *, textColor)
 LAYER_UPDATE_ANIMATION_MUTATOR(setInterval:, CFTimeInterval, interval)
 LAYER_UPDATE_ANIMATION_MUTATOR(setTextFont:, UIFont *, textFont)
 LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
-
 
 - (BOOL)isAnimating
 {
@@ -162,6 +160,10 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
     self.string = _attributedString;
     [_displayLink invalidate];
     self.displayLink = nil;
+    
+    // notify the caller the animation has completed
+    SEL animationDidEndSelector = NSSelectorFromString(@"lazyFadeInLayerAnimationDidEnd");
+    [self.sourceView performSelector:animationDidEndSelector withObject:nil afterDelay:0];
 }
 
 - (void)_frameUpdate:(id)sender
@@ -187,7 +189,6 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
         [_animatingAttributedString addAttribute:(NSString *)kCTForegroundColorAttributeName
                                            value:(id)currentColor.CGColor
                                            range:NSMakeRange(i, 1)];
-
     }
     
     if (isFinished) {
