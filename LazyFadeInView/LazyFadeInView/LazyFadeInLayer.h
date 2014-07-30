@@ -9,8 +9,6 @@
 #import <QuartzCore/QuartzCore.h>
 #import "LazyFadeIn.h"
 
-@class LazyFadeInView;
-
 @interface LazyFadeInLayer : CATextLayer <LazyFadeIn>
 
 @property (weak, nonatomic) UIView *sourceView;
