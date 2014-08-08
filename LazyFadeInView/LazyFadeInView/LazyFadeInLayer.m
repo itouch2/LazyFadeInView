@@ -234,20 +234,19 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
     }
     
     NSUInteger totalCount = _text.length;
-
-    NSUInteger tTotalCount = totalCount;
+    
+    NSUInteger tTotalCount = totalCount + 1;
     [_tmpArray removeAllObjects];
     self.tmpArray = [NSMutableArray arrayWithCapacity:_numberOfLayers];
     
-    for (int i = 0; i < _numberOfLayers; ++i)
+    for (int i = 0; i < _numberOfLayers - 1; ++i)
     {
         int k = arc4random() % tTotalCount;
         [_tmpArray addObject:@(k)];
-        if (tTotalCount < k) {
-            break;
-        }
         tTotalCount -= k;
     }
+    [_tmpArray addObject:@(tTotalCount - 1)];
+    NSLog(@"%@", _tmpArray);
     
     for (int i = 0; i < _tmpArray.count; ++i)
     {
@@ -256,11 +255,11 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
         while (count)
         {
             int k = arc4random() % totalCount;
-            if ([_alphaArray[k] floatValue] > 0.0f)
+            if ([_alphaArray[k] floatValue] > 0.01f)
             {
                 _alphaArray[k] = @(alpha);
+                count--;
             }
-            count--;
         }
     }
     

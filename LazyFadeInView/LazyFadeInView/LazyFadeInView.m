@@ -39,16 +39,30 @@ LAYER_RW_PROPERTY(attributes, setAttributes:, NSDictionary *)
     return [LazyFadeInLayer class];
 }
 
+- (id)initWithCoder:(NSCoder *)aDecoder
+{
+    if (self = [super initWithCoder:aDecoder])
+    {
+        [self commonInit];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
     if (self)
     {
-        self.backgroundColor = [UIColor clearColor];
-        self.layer.contentsScale = [UIScreen mainScreen].scale;
-        ((LazyFadeInLayer *)self.layer).sourceView = self;
+        [self commonInit];
     }
     return self;
+}
+
+- (void)commonInit
+{
+    self.backgroundColor = [UIColor blueColor];
+    self.layer.contentsScale = [UIScreen mainScreen].scale;
+    ((LazyFadeInLayer *)self.layer).sourceView = self;
 }
 
 - (void)lazyFadeInLayerAnimationDidEnd
