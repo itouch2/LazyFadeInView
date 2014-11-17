@@ -60,7 +60,7 @@ LAYER_RW_PROPERTY(attributes, setAttributes:, NSDictionary *)
 
 - (void)commonInit
 {
-    self.backgroundColor = [UIColor blueColor];
+    self.backgroundColor = [UIColor clearColor];
     self.layer.contentsScale = [UIScreen mainScreen].scale;
     ((LazyFadeInLayer *)self.layer).sourceView = self;
 }
