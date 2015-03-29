@@ -12,14 +12,13 @@
 #define LAYER_UPDATE_ANIMATION_MUTATOR(mutator,ctype,propertyName)  \
 - (void)mutator (ctype)propertyName \
 { \
-    if (_##propertyName != propertyName) { \
-        _##propertyName = propertyName; \
-        [self _updateAnimation]; \
-    } \
+if (_##propertyName != propertyName) { \
+_##propertyName = propertyName; \
+[self _updateAnimation]; \
+} \
 }
 
-@interface LazyFadeInLayer ()
-{
+@interface LazyFadeInLayer () {
     BOOL _isAnimating;
 }
 
@@ -30,7 +29,7 @@
 
 @property (strong, nonatomic) NSMutableArray *tmpArray;
 
-@property (nonatomic) NSUInteger frameCount;
+@property (assign, nonatomic) NSUInteger frameCount;
 
 @end
 
@@ -44,14 +43,13 @@
 - (instancetype)init
 {
     self = [super init];
-    if (self)
-    {
+    if (self) {
         _numberOfLayers = 6;
         _interval = 0.03;
         _alphaArray = [NSMutableArray array];
         _tmpArray = [NSMutableArray array];
         _textFont = [UIFont fontWithName:@"HelveticaNeue-Light" size:20.0f];
-        _textColor = [UIColor whiteColor];
+        _textColor = [UIColor colorWithRed:0.24 green:0.48 blue:0.82 alpha:1];
         
         self.contentsScale = [[UIScreen mainScreen] scale];
         self.wrapped = YES;
@@ -59,7 +57,7 @@
     return self;
 }
 
-LAYER_UPDATE_ANIMATION_MUTATOR(setNumberOfLayers:,NSUInteger,numberOfLayers)
+LAYER_UPDATE_ANIMATION_MUTATOR(setNumberOfLayers:, NSUInteger, numberOfLayers)
 LAYER_UPDATE_ANIMATION_MUTATOR(setText:, NSString *, text)
 LAYER_UPDATE_ANIMATION_MUTATOR(setTextColor:, UIColor *, textColor)
 LAYER_UPDATE_ANIMATION_MUTATOR(setInterval:, CFTimeInterval, interval)
@@ -74,16 +72,12 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
 - (void)_updateAnimation
 {
     if (_text && _text.length != 0) {
-        if (self.isAnimating)
-        {
+        if (self.isAnimating) {
             [self _stopAnimating];
         }
         [self _startAnimating];
-    }
-    else
-    {
-        if (self.isAnimating)
-        {
+    } else {
+        if (self.isAnimating) {
             [self _stopAnimating];
         }
     }
@@ -93,33 +87,21 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
 {
     id style = [_attributes objectForKey:(NSString *)kCTParagraphStyleAttributeName];
     CTParagraphStyleRef paragraphStyle = (__bridge CTParagraphStyleRef)(style);
-    if (paragraphStyle)
-    {
+    if (paragraphStyle) {
         CTTextAlignment textAlignment = kCTTextAlignmentNatural;
         CTParagraphStyleGetValueForSpecifier(paragraphStyle, kCTParagraphStyleSpecifierAlignment, sizeof(textAlignment), &textAlignment);
-        if (textAlignment == kCTTextAlignmentLeft)
-        {
+        if (textAlignment == kCTTextAlignmentLeft) {
             self.alignmentMode = kCAAlignmentLeft;
-        }
-        else if (textAlignment == kCTTextAlignmentRight)
-        {
+        } else if (textAlignment == kCTTextAlignmentRight) {
             self.alignmentMode = kCAAlignmentRight;
-        }
-        else if (textAlignment == kCTTextAlignmentCenter)
-        {
+        } else if (textAlignment == kCTTextAlignmentCenter) {
             self.alignmentMode = kCAAlignmentCenter;
-        }
-        else if (textAlignment == kCTTextAlignmentJustified)
-        {
+        } else if (textAlignment == kCTTextAlignmentJustified) {
             self.alignmentMode = kCAAlignmentJustified;
-        }
-        else if (textAlignment == kCTTextAlignmentNatural)
-        {
+        } else if (textAlignment == kCTTextAlignmentNatural) {
             self.alignmentMode = kCAAlignmentNatural;
         }
-    }
-    else
-    {
+    } else {
         self.alignmentMode = kCAAlignmentNatural;
     }
 }
@@ -141,8 +123,8 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
     
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)_textFont.fontName, _textFont.pointSize, NULL);
     [_attributedString addAttribute:(NSString *)kCTFontAttributeName
-                                           value:(__bridge id)fontRef
-                                           range:NSMakeRange(0, _text.length)];
+                              value:(__bridge id)fontRef
+                              range:NSMakeRange(0, _text.length)];
     [_attributedString addAttribute:(NSString *)kCTForegroundColorAttributeName value:(__bridge id)_textColor.CGColor range:NSMakeRange(0, _text.length)];
     CFRelease(fontRef);
     
@@ -179,8 +161,7 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
     
     [_textColor getRed:&toColorR green:&toColorG blue:&toColorB alpha:&toColorAlpha];
     
-    for (int i = 0; i < _text.length; ++i)
-    {
+    for (int i = 0; i < _text.length; ++i) {
         CGFloat currentColorAlpha = [_alphaArray[i] floatValue] + _frameCount * _interval;
         if (isFinished && currentColorAlpha < toColorAlpha) {
             isFinished = NO;
@@ -209,8 +190,7 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
         if (_text.length != _alphaArray.count) {
             [self _resetAlphaArray];
         }
-    }
-    else{
+    } else {
         [self _resetAlphaArray];
     }
 }
@@ -219,8 +199,7 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
 {
     [_alphaArray removeAllObjects];
     self.alphaArray = [NSMutableArray arrayWithCapacity:_text.length];
-    for (int i = 0; i < _text.length; ++i)
-    {
+    for (int i = 0; i < _text.length; ++i) {
         [_alphaArray addObject:@(MAXFLOAT)];
     }
     
@@ -237,35 +216,26 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
     
     NSUInteger tTotalCount = totalCount + 1;
     [_tmpArray removeAllObjects];
-    self.tmpArray = [NSMutableArray arrayWithCapacity:_numberOfLayers];
+    _tmpArray = [NSMutableArray arrayWithCapacity:_numberOfLayers];
     
-    for (int i = 0; i < _numberOfLayers - 1; ++i)
-    {
+    for (int i = 0; i < _numberOfLayers - 1; ++i) {
         int k = arc4random() % tTotalCount;
         [_tmpArray addObject:@(k)];
         tTotalCount -= k;
     }
     [_tmpArray addObject:@(tTotalCount - 1)];
-    NSLog(@"%@", _tmpArray);
     
-    for (int i = 0; i < _tmpArray.count; ++i)
-    {
+    for (int i = 0; i < _tmpArray.count; ++i) {
         int count = [_tmpArray[i] intValue];
         CGFloat alpha = -(i * 0.25);
-        while (count)
-        {
+        while (count) {
             int k = arc4random() % totalCount;
-            if ([_alphaArray[k] floatValue] > 0.01f)
-            {
+            if ([_alphaArray[k] floatValue] > 0.01f) {
                 _alphaArray[k] = @(alpha);
                 count--;
             }
         }
     }
-    
-#ifdef DEBUG
-    NSLog(@"%@",_alphaArray);
-#endif
 }
 
 @end

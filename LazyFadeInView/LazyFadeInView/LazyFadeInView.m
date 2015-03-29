@@ -39,20 +39,18 @@ LAYER_RW_PROPERTY(attributes, setAttributes:, NSDictionary *)
     return [LazyFadeInLayer class];
 }
 
-- (id)initWithCoder:(NSCoder *)aDecoder
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    if (self = [super initWithCoder:aDecoder])
-    {
+    if (self = [super initWithCoder:aDecoder]) {
         [self commonInit];
     }
     return self;
 }
 
-- (id)initWithFrame:(CGRect)frame
+- (instancetype)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self)
-    {
+    if (self) {
         [self commonInit];
     }
     return self;
@@ -67,8 +65,7 @@ LAYER_RW_PROPERTY(attributes, setAttributes:, NSDictionary *)
 
 - (void)lazyFadeInLayerAnimationDidEnd
 {
-    if ([self.delegate respondsToSelector:@selector(fadeInAnimationDidEnd:)])
-    {
+    if ([self.delegate respondsToSelector:@selector(fadeInAnimationDidEnd:)]) {
         [self.delegate fadeInAnimationDidEnd:self];
     }
 }
