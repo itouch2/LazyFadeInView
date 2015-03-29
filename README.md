@@ -18,7 +18,7 @@ self.fadeInView.textColor = [UIColor whiteColor];
 [CocosPods](http://cocosPods.org) is the recommended method to install LazyFadeInView, just add the following line to `Podfile`
 
 ```
-pod 'LazyFadeInView', '~> 0.1.4'
+pod 'LazyFadeInView', '~> 1.0.0'
 ```
 
 and run `pod install`, then you're all done!
