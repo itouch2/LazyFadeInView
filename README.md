@@ -1,6 +1,12 @@
 # LazyFadeInView
 LazyFadeInView is a cool way to animate the apperance of a label. This effect is a clone of [Secret app](https://itunes.apple.com/us/app/secret-speak-freely/id775307543?mt=8). 
 
+[![Build Status](https://travis-ci.org/itouch2/LazyFadeInView.svg)](https://travis-ci.org/itouch2/LazyFadeInView)
+[![Pod Version](http://img.shields.io/cocoapods/v/LazyFadeInView.svg?style=flat)](http://cocoapods.org/?q=LazyFadeInView)
+[![Platform](http://img.shields.io/cocoapods/p/LazyFadeInView.svg?style=flat)](http://cocoapods.org/?q=LazyFadeInView)
+[![License](http://img.shields.io/cocoapods/l/LazyFadeInView.svg?style=flat)](https://github.com/itouch2/LazyFadeInView/blob/master/LICENSE)
+
+
 ## Usage
 To use LazyFadeInView, create a `LazyFadeInView` and add it to your view. It will animate to show up once it's text is set.
 
