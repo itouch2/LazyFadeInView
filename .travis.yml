@@ -1,0 +1,5 @@
+language: objective-c
+xcode_project: LazyFadeInView.xcodeproj
+xcode_scheme: LazyFadeInView
+xcode_sdk:
+  - iphonesimulator8.1
