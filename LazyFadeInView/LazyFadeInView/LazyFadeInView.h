@@ -13,6 +13,7 @@
 
 @protocol LazyFadeInViewDelegate <NSObject>
 
+@optional
 - (void)fadeInAnimationDidEnd:(LazyFadeInView *)fadeInView;
 
 @end

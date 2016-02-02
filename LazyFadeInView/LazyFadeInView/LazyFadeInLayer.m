@@ -38,7 +38,7 @@ _##propertyName = propertyName; \
 @synthesize numberOfLayers = _numberOfLayers;
 @synthesize interval = _interval;
 @synthesize textColor = _textColor, textFont = _textFont;
-@synthesize text = _text,attributes = _attributes;
+@synthesize text = _text, attributes = _attributes;
 
 - (instancetype)init
 {

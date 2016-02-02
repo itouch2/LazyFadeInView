@@ -31,7 +31,7 @@ LAYER_RW_PROPERTY(numberOfLayers, setNumberOfLayers:, NSUInteger)
 LAYER_RW_PROPERTY(interval, setInterval:, CFTimeInterval)
 LAYER_RW_PROPERTY(textFont, setTextFont:, UIFont *)
 LAYER_RW_PROPERTY(textColor, setTextColor:, UIColor *)
-LAYER_RW_PROPERTY(text,setText:,NSString *)
+LAYER_RW_PROPERTY(text, setText:, NSString *)
 LAYER_RW_PROPERTY(attributes, setAttributes:, NSDictionary *)
 
 + (Class)layerClass
