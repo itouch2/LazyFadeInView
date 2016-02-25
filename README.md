@@ -1,5 +1,5 @@
 # LazyFadeInView
-LazyFadeInView is a cool way to animate the appearance of a label. This effect is a clone of [Secret app](https://itunes.apple.com/us/app/secret-speak-freely/id775307543?mt=8). 
+LazyFadeInView is a cool way to animate the appearance of a label. This effect is a clone of [Secret app](https://itunes.apple.com/us/app/secret-speak-freely/id775307543?mt=8). You can find Swift version in [here](https://github.com/itouch2/LazyFadeInView-Swift/)
 
 [![Build Status](https://travis-ci.org/itouch2/LazyFadeInView.svg)](https://travis-ci.org/itouch2/LazyFadeInView)
 [![Pod Version](http://img.shields.io/cocoapods/v/LazyFadeInView.svg?style=flat)](http://cocoapods.org/?q=LazyFadeInView)
