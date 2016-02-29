@@ -24,6 +24,7 @@
 		CB028D6C1903E0660044B86F /* LazyFadeInViewTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D6B1903E0660044B86F /* LazyFadeInViewTests.m */; };
 		CB028D781903E0A10044B86F /* LazyFadeInView.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D771903E0A10044B86F /* LazyFadeInView.m */; };
 		CB028D7B1903E10C0044B86F /* LazyFadeInLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */; };
+		CBA2DD0D1C844BFC00FC6065 /* NSString+LFEmoji.m in Sources */ = {isa = PBXBuildFile; fileRef = CBA2DD0C1C844BFC00FC6065 /* NSString+LFEmoji.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,8 @@
 		CB028D791903E10C0044B86F /* LazyFadeInLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LazyFadeInLayer.h; sourceTree = "<group>"; };
 		CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LazyFadeInLayer.m; sourceTree = "<group>"; };
 		CB2DA0D619056C7500E152D1 /* LazyFadeIn.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LazyFadeIn.h; sourceTree = "<group>"; };
+		CBA2DD0B1C844BFC00FC6065 /* NSString+LFEmoji.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+LFEmoji.h"; sourceTree = "<group>"; };
+		CBA2DD0C1C844BFC00FC6065 /* NSString+LFEmoji.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+LFEmoji.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -171,6 +174,8 @@
 				CB028D771903E0A10044B86F /* LazyFadeInView.m */,
 				CB028D791903E10C0044B86F /* LazyFadeInLayer.h */,
 				CB028D7A1903E10C0044B86F /* LazyFadeInLayer.m */,
+				CBA2DD0B1C844BFC00FC6065 /* NSString+LFEmoji.h */,
+				CBA2DD0C1C844BFC00FC6065 /* NSString+LFEmoji.m */,
 			);
 			path = LazyFadeInView;
 			sourceTree = "<group>";
@@ -277,6 +282,7 @@
 				CB028D781903E0A10044B86F /* LazyFadeInView.m in Sources */,
 				CB028D7B1903E10C0044B86F /* LazyFadeInLayer.m in Sources */,
 				CB028D4E1903E0660044B86F /* AppDelegate.m in Sources */,
+				CBA2DD0D1C844BFC00FC6065 /* NSString+LFEmoji.m in Sources */,
 				CB028D4A1903E0660044B86F /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

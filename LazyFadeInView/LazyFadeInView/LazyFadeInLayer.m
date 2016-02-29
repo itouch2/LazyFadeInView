@@ -8,6 +8,7 @@
 
 #import "LazyFadeInLayer.h"
 #import <CoreText/CoreText.h>
+#import "NSString+LFEmoji.h"
 
 #define LAYER_UPDATE_ANIMATION_MUTATOR(mutator,ctype,propertyName)  \
 - (void)mutator (ctype)propertyName \
@@ -230,12 +231,31 @@ LAYER_UPDATE_ANIMATION_MUTATOR(setAttributes:, NSDictionary *, attributes)
         CGFloat alpha = -(i * 0.25);
         while (count) {
             int k = arc4random() % totalCount;
-            if ([_alphaArray[k] floatValue] > 0.01f) {
-                _alphaArray[k] = @(alpha);
+            if ([_alphaArray[k] floatValue] > 1) {
+                if ([self charIsInEmojAtIndex:k]) {
+                    _alphaArray[k] = @(1);
+                } else {
+                    _alphaArray[k] = @(alpha);
+                }
                 count--;
             }
         }
     }
 }
 
+- (BOOL)charIsInEmojAtIndex:(NSUInteger)index
+{
+    NSArray *array = [self.text lf_emojiRanges];
+    __block BOOL isIn = NO;
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSRange range = ((NSValue *)obj).rangeValue;
+        if (index >= range.location && index < range.location + range.length) {
+            isIn = YES;
+            *stop = YES;
+        }
+    }];
+    return isIn;
+}
+
 @end
+

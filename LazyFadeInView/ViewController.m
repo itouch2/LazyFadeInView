@@ -11,7 +11,7 @@
 
 static NSString * const kStrayBirds = @"Stray birds of summer come to my window to sing and fly away. And yellow leaves of autumn, which have no songs, flutter and fall there with a sign. O Troupe of little vagrants of the world, leave your footprints in my words.";
 
-static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月，耳得之而为声，目遇之而成色。取之无禁，用之不竭。是造物者之无尽藏也，而吾与子之所共适。";
+static NSString * const kQianChiBiFu = @"😝😝😝😝😝😝😝😝😝😝😝😝😝😝惟江上之清风，与山间之明月，耳得之而为声，目遇之而成色。取之无禁，用之不竭。是造物者之无尽藏也，而吾与子之所共适。";
 
 @interface ViewController () <LazyFadeInViewDelegate>
 
@@ -30,7 +30,7 @@ static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月
     LazyFadeInView *fade = [[LazyFadeInView alloc] initWithFrame:CGRectMake(20, 100, screenWidth - 40, 200)];
     fade.delegate = self;
     fade.textColor = [UIColor whiteColor];
-    fade.text = @"Stray birds of summer come to my window to sing and fly away. And yellow leaves of autumn, which have no songs, flutter and fall there with a sign. O Troupe of little vagrants of the world, leave your footprints in my words.";
+    fade.text = kStrayBirds;
     [self.view addSubview:fade];
     self.view.backgroundColor = [UIColor blackColor];
     self.fadeInView = fade;
@@ -46,7 +46,7 @@ static NSString * const kChinesePoem = @"惟江上之清风，与山间之明月
     if (self.flag) {
         self.fadeInView.text = kStrayBirds;
     } else {
-        self.fadeInView.text = kChinesePoem;
+        self.fadeInView.text = kQianChiBiFu;
     }
     self.flag = !self.flag;
 }
